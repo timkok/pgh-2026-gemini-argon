@@ -1715,9 +1715,15 @@ function downloadBlob(content, filename, mime) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1500);
 }
+function sanitizeForExport(str) {
+  if (!STATE.privacyMasked || typeof str !== 'string') return str;
+  return str.replace(/3341\s+Forbes\s+Ave(nue)?/gi, 'Oakland University Area (Sanitized)').replace(/3341\+Forbes\+Ave(nue)?/gi, 'Oakland+University+Area').replace(/3341%20Forbes%20Ave(nue)?/gi, 'Oakland%20University%20Area');
+}
 function exportJSON() {
   const eff = getEffectiveSegments(STATE.plan, STATE.day);
-  const expSegs = eff.segs.map(s => ({ ...s, origin_address: maskAddress(s.origin_address), dest_address: maskAddress(s.dest_address) })); downloadBlob(JSON.stringify({ plan: STATE.plan, day: STATE.day, privacyMasked: STATE.privacyMasked, controls: STATE.controls, segments: expSegs }, null, 2), `pittsburgh_plan_${STATE.plan}_${STATE.day}.json`, 'application/json');
+  let raw = JSON.stringify({ plan: STATE.plan, day: STATE.day, privacyMasked: STATE.privacyMasked, controls: STATE.controls, segments: eff.segs }, null, 2);
+  raw = sanitizeForExport(raw);
+  downloadBlob(raw, `pittsburgh_plan_${STATE.plan}_${STATE.day}.json`, 'application/json');
   showToast('📦 已导出当日行程 JSON');
 }
 function exportCSV() {
@@ -1725,7 +1731,7 @@ function exportCSV() {
   const rows = [['序号','时间窗口','站点名称','标签','交通方式','步行米数','五人费用','地址']];
   eff.segs.forEach((s, i) => rows.push([i+1, s._effTimeWindow, s.title_zh, s.tag, s.mode_zh, s._effWalkMeters, s.cost_5p, maskAddress(s.dest_address)]));
   const csv = '\uFEFF' + rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
-  downloadBlob(csv, `pittsburgh_plan_${STATE.plan}_${STATE.day}.csv`, 'text/csv;charset=utf-8');
+  downloadBlob(sanitizeForExport(csv), `pittsburgh_plan_${STATE.plan}_${STATE.day}.csv`, 'text/csv;charset=utf-8');
   showToast('📊 已导出当日行程 CSV');
 }
 function exportICS() {
@@ -1739,7 +1745,7 @@ function exportICS() {
     lines.push('BEGIN:VEVENT', `UID:pgh2026-${STATE.plan}-${ymd}-${i}@family`, `DTSTART;TZID=America/New_York:${ymd}T${st}`, `DTEND;TZID=America/New_York:${ymd}T${en}`, `SUMMARY:${s.title_zh}`, `LOCATION:${maskAddress(s.dest_address)}`, `DESCRIPTION:${s.desc_zh}`, 'END:VEVENT');
   });
   lines.push('END:VCALENDAR');
-  downloadBlob(lines.join('\r\n'), `pittsburgh_plan_${STATE.plan}_${STATE.day}.ics`, 'text/calendar;charset=utf-8');
+  downloadBlob(sanitizeForExport(lines.join('\r\n')), `pittsburgh_plan_${STATE.plan}_${STATE.day}.ics`, 'text/calendar;charset=utf-8');
   showToast('📅 已导出当日苹果/谷歌日历 ICS 文件');
 }
 
