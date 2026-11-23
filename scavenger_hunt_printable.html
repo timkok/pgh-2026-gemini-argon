@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>匹兹堡城市寻宝｜单页双语打印卡 + 家长答案 + 证书</title>
+<style>
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    background: #F4F1E8;
+    color: #1A241E;
+    line-height: 1.26;
+  }
+  .hunt-sheet {
+    background: #FFFFFF;
+    border: 2.5px solid #164A35;
+    border-radius: 8px;
+    padding: 9px 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .h-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #164A35;
+    color: #FFF;
+    padding: 7px 11px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+  }
+  .h-badge {
+    display: inline-block;
+    background: #F4B400;
+    color: #111;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1.5px 7px;
+    border-radius: 99px;
+    margin-bottom: 2px;
+  }
+  .h-header h1 { font-size: 15.5px; font-weight: 900; line-height: 1.15; }
+  .h-sub { font-size: 8.6px; color: #DCEFE4; margin-top: 2px; }
+  .h-score {
+    background: #FFF;
+    color: #111;
+    padding: 4px 8px;
+    border-radius: 5px;
+    min-width: 136px;
+    border: 2px solid #F4B400;
+  }
+  .hs-l { font-size: 8.8px; font-weight: 800; color: #164A35; }
+  .hs-line { border-bottom: 1.5px solid #111; height: 13px; }
+  .h-rules {
+    background: #FFF7DF;
+    border: 1.5px solid #D97706;
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-size: 8.4px;
+    color: #3E2400;
+    margin-bottom: 6px;
+  }
+  .tgrid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    flex: 1;
+  }
+  .tcard {
+    border: 1.5px solid #B8C9BF;
+    border-top: 4px solid #164A35;
+    border-radius: 6px;
+    padding: 5px 7px;
+    background: #FCFBF8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tcard-top {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+  .chk { font-size: 14px; font-weight: 900; color: #164A35; line-height: 1; }
+  .tid { background: #164A35; color: #FFF; font-size: 8.3px; font-weight: 800; padding: 1px 5px; border-radius: 3px; }
+  .tpts { background: #FEF3C7; color: #92400E; border: 1px solid #F59E0B; font-size: 8.3px; font-weight: 800; padding: 0 4px; border-radius: 3px; }
+  .pill-free { font-size: 7.5px; background: #DCFCE7; color: #166534; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+  .pill-ticket { font-size: 7.5px; background: #FEE2E2; color: #991B1B; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+  .tday { font-size: 7.6px; color: #4B5563; margin-left: auto; font-weight: 700; }
+  .ttitle { font-size: 10.2px; font-weight: 900; color: #111827; line-height: 1.2; }
+  .ten { font-size: 7.8px; color: #4B5563; font-weight: 600; margin-bottom: 2px; }
+  .tloc { font-size: 7.8px; color: #164A35; font-weight: 700; margin-bottom: 2px; }
+  .tq { font-size: 8.2px; color: #111; line-height: 1.26; margin-bottom: 1.5px; }
+  .tqe { font-size: 7.4px; color: #374151; font-style: italic; line-height: 1.2; margin-bottom: 2px; }
+  .talt { font-size: 7.5px; color: #1E40AF; background: #EFF6FF; padding: 2px 4px; border-radius: 3px; line-height: 1.2; margin-bottom: 1.5px; }
+  .tbg { font-size: 7.2px; color: #4B5563; line-height: 1.18; margin-bottom: 3px; }
+  .twrite {
+    border: 1.2px dashed #9CA3AF;
+    border-radius: 4px;
+    background: #FFFFFF;
+    min-height: 22px;
+    padding: 2px 5px;
+    margin-top: auto;
+  }
+  .twrite span { font-size: 7px; color: #9CA3AF; }
+  .h-footer {
+    margin-top: 5px;
+    padding-top: 4px;
+    border-top: 1.5px solid #164A35;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    color: #164A35;
+    font-weight: 700;
+  }
+
+  /* Answers 2-page strict fit */
+  .ans-sheet {
+    background: #FFF;
+    border: 2px solid #374151;
+    border-radius: 7px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .a-hdr { background: #1F2937; color: #FFF; padding: 7px 11px; border-radius: 5px; margin-bottom: 6px; }
+  .a-hdr h1 { font-size: 13.5px; font-weight: 800; }
+  .a-sub { font-size: 8.5px; color: #D1D5DB; margin-top: 2px; }
+  .a-grid { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .a-card { border: 1px solid #D1D5DB; border-left: 3.5px solid #164A35; border-radius: 4px; padding: 3.5px 6px; background: #F9FAFB; }
+  .a-head { font-size: 9px; color: #111; margin-bottom: 1px; }
+  .atrk { font-size: 8px; color: #164A35; font-weight: 800; }
+  .a-body { font-size: 8.2px; color: #1F2937; line-height: 1.24; }
+  .a-hint { font-size: 7.7px; color: #4B5563; line-height: 1.22; margin-top: 1px; }
+  .a-ftr { margin-top: 5px; font-size: 7.8px; color: #6B7280; text-align: center; border-top: 1px solid #E5E7EB; padding-top: 3px; }
+
+  /* Certificate */
+  .cert-sheet { background: #FAF7F0; padding: 14px; display: flex; align-items: center; justify-content: center; }
+  .cert-frame { width: 100%; height: 100%; border: 9px double #164A35; padding: 12px; background: #FFF; border-radius: 10px; }
+  .cert-inner { width: 100%; height: 100%; border: 3px solid #D97706; border-radius: 8px; padding: 24px 30px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+  .cert-emblem { font-size: 12px; font-weight: 800; letter-spacing: 2px; color: #B45309; background: #FEF3C7; display: inline-block; margin: 0 auto; padding: 5px 16px; border-radius: 99px; }
+  .cert-title-zh { font-size: 36px; font-weight: 900; color: #164A35; margin-top: 8px; letter-spacing: 4px; }
+  .cert-title-en { font-size: 13px; font-weight: 700; color: #4B5563; letter-spacing: 2px; }
+  .cert-award-to { font-size: 13px; color: #374151; margin-top: 14px; }
+  .cert-name-line { width: 65%; margin: 24px auto 8px auto; border-bottom: 2.5px solid #164A35; }
+  .cert-track-check { font-size: 14px; font-weight: 700; color: #164A35; margin-bottom: 10px; }
+  .cert-body { font-size: 14px; line-height: 1.65; color: #1F2937; max-width: 92%; margin: 0 auto; background: #F8FAF9; padding: 12px 16px; border-radius: 8px; border: 1px solid #D1E3D8; }
+  .cert-rewards { margin-top: 12px; text-align: left; }
+  .cert-rewards h3 { text-align: center; font-size: 14px; color: #92400E; margin-bottom: 8px; }
+  .reward-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+  .reward-card { border: 1.5px solid #D97706; background: #FFFBEB; border-radius: 7px; padding: 9px; }
+  .r-badge { font-size: 11px; font-weight: 800; color: #92400E; margin-bottom: 3px; }
+  .r-txt { font-size: 10.5px; color: #374151; line-height: 1.35; }
+  .cert-sigs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 22px; }
+  .sig-line { border-bottom: 2px solid #1F2937; height: 26px; margin-bottom: 5px; }
+  .sig-cap { font-size: 10.5px; color: #374151; font-weight: 700; }
+  .cert-foot { font-size: 8.5px; color: #6B7280; margin-top: 10px; }
+
+.hunt-sheet, .ans-sheet, .cert-sheet { width: 202mm; min-height: 264mm; margin: 12px auto; }
+.toolbar { max-width: 202mm; margin: 12px auto; background: #164A35; color: #FFF; padding: 11px 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+.toolbar button { background: #F4B400; color: #111; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 800; cursor: pointer; }
+@media print {
+  body { background: #FFF; }
+  .toolbar { display: none; }
+  .hunt-sheet, .ans-sheet, .cert-sheet { width: 100%; min-height: auto; margin: 0; page-break-after: always; break-after: page; }
+  .cert-sheet { page-break-after: auto; break-after: auto; }
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div><strong>🖨️ 匹兹堡城市寻宝打印套组</strong>（第1页 10岁卡｜第2页 12岁卡｜第3-4页 家长答案｜第5页 荣誉证书）</div>
+  <button onclick="window.print()">打印全部 / 存为 PDF</button>
+</div>
+
+    <div class="hunt-sheet" id="card_junior">
+      <div class="h-header">
+        <div class="h-hleft">
+          <div class="h-badge">🔍 10岁观察员｜单页双语纸卡（配对网站 ID）</div>
+          <h1>匹兹堡城市寻宝｜10岁观察员任务卡 (Junior Observer Track)</h1>
+          <div class="h-sub">2026-11-27～29 五人家庭行 · 无需手机与二维码，纸卡直接玩！完整 22 题及互动计分见微信网站（同题 ID 同步）</div>
+        </div>
+        <div class="h-score">
+          <div class="hs-l">探险家姓名 Name</div>
+          <div class="hs-line"></div>
+          <div class="hs-l" style="margin-top:3px;">得分 Score：_____ / 100</div>
+        </div>
+      </div>
+      <div class="h-rules">
+        <strong>🛡️ 安全规则：</strong>不与大人和奶奶分开；远离车流轨线；不进需球票检票区；不拍陌生人、无需扫码或购物。 ｜ <strong>👵 奶奶角色：</strong>首席领航员 & 计分官！汇报发现，奶奶点头即勾选得分！
+      </div>
+      <div class="tgrid-2col">
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J01</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">魔法大厅的铁花与汉字</div>
+          <div class="ten">Iron Symbols & Chinese Characters in the Cathedral</div>
+          <div class="tloc">📍 匹大灵魂教堂 Cathedral ｜ 👵 奶奶可坐答</div>
+          <div class="tq">走进 Cathedral of Learning 一楼宏伟的哥特大厅（Commons Room），坐在奶奶身旁找一找：大门或走廊铁艺上有哪些对称几何图案？在 136 号中国教室门窗外找一个你认识的汉字，把它画或写在方格里！</div>
+          <div class="tqe">In the 1st-floor Commons Room, spot a symmetrical iron pattern and find one Chinese character at Room 136 (Chinese Room). Draw or write it down!</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【同分替代（10分）】若未进大楼，在车内或 Schenley Plaza 观察大楼外观：画出这座摩天楼顶部像阶梯一样一层层收窄的哥特尖塔轮廓！</div>
+          <div class="tbg">📚 这座 42 层高的教学楼是由匹兹堡市民和小学生一人捐一分钱买砖盖起来的（出处：Pitt Nationality Rooms 官网）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J02</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-ticket">需门票/有免费替代</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">温室里的松果火车站与对称花朵</div>
+          <div class="ten">Pinecone Train Station & Symmetrical Blooms at Phipps</div>
+          <div class="tloc">📍 菲普斯温室 Phipps ｜ 👵 奶奶可坐答</div>
+          <div class="tq">【需门票】在 Phipps 温室里完成两件观察：① 在 Garden Railroad 微缩火车展厅找出 2 种用纯天然植物（如松果鳞片、桦树皮、小树枝）贴成的小屋顶或小桥；② 找到一朵具有旋转对称或五角星形状的节日花朵（如一品红 Poinsettia），画下它的叶子形状！</div>
+          <div class="tqe">[Ticket Req] At Phipps: 1) Spot 2 miniature train buildings made of natural bark/pinecones; 2) Sketch a star-shaped Poinsettia leaf!</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【免票/未去同分替代（15分）】在 Schenley Plaza 或酒店大堂找到一棵节日装饰树或松树，观察并画出松针或冬青叶子的对称排列方式！</div>
+          <div class="tbg">📚 1893 年钢铁大亨 Henry Phipps 建这座温室时，坚持周日必须开门，好让周日才放假的炼钢工人能带孩子看花（出处：Phipps 官网）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J03</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">围巾恐龙 Dippy 与霸王龙的手指</div>
+          <div class="ten">Dippy's Holiday Scarf & T-Rex Fingers</div>
+          <div class="tloc">📍 卡内基博物馆 Carnegie ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在 Carnegie 博物馆完成观察（门外免费或馆内凭票均可）：① 看博物馆外 Forbes Ave 草坪上的黑色巨型恐龙雕像 Dippy，它今天戴着什么颜色或图案的节日围巾？② 如果进了馆内恐龙厅，数数霸王龙（T. rex）前爪有几根手指？（没进馆就画下门外 Dippy 长长的脖子和尾巴！）</div>
+          <div class="tqe">Check Dippy the Dinosaur statue outside on Forbes Ave: What color is its holiday scarf? Inside (or sketch Dippy's tail outside): How many fingers on a T. rex hand?</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【雨天车内同分替代（15分）】乘车经过 4400 Forbes Ave 时从右侧车窗看戴围巾的 Dippy 恐龙雕像，画出它高昂脖子的剪影！</div>
+          <div class="tbg">📚 当年卡内基把这只匹兹堡恐龙的复制品送给了英、法、德、俄等八国国王，让全世界认识了梁龙（出处：Carnegie Museum of Natural History）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J04</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">阿兹特克金：寻找三胞胎黄桥</div>
+          <div class="ten">Aztec Gold: Spot the Three Sisters Yellow Bridges</div>
+          <div class="tloc">📍 三姐妹黄桥 Three Sisters ｜ 👵 奶奶可坐答</div>
+          <div class="tq">从河岸安全步道、Mt. Washington 观景台或过桥车窗内（仅限乘客），找到并排跨过阿勒格尼河的三座鲜黄色铁桥（Three Sisters）。看一看它们桥塔门洞是什么几何形状？在纸卡空白处画出桥塔和吊链的样子！</div>
+          <div class="tqe">From a safe walkway, overlook, or car window (passengers only), spot the three identical yellow bridges. What shape are the tower arches? Sketch one!</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【雨天车内同分替代（10分）】坐在车后排经过任意一座黄色大桥时，数一数桥顶钢梁上有多少个交叉的 X 形结构！</div>
+          <div class="tbg">📚 匹兹堡拥有 446 座桥梁，而这三座是全美唯一一组一模一样的三联自锚式悬索桥（出处：Heinz History Center）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J05</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">百年红缆车与脚下的大齿轮</div>
+          <div class="ten">The 1877 Red Funicular & Giant Gears</div>
+          <div class="tloc">📍 华盛顿山缆车 Duquesne Incline ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在华盛顿山顶的 Duquesne Incline（或 Monongahela Incline）上站（免费进入候车厅和观景台）：① 观察斜坡上的缆车车厢是什么颜色的？它的窗户是怎么排列的？② 站在上站观景台数一数你能同时看到几座跨河大桥！</div>
+          <div class="tqe">At the free Upper Station of Duquesne or Mon Incline: What color is the cable car? From the overlook deck, how many river bridges can you count at once?</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【雨雾同分替代（10分）】如果山顶起雾看不清远处的桥，走进 Duquesne 上站屋里，透过玻璃窗观察并画出带动钢缆的大齿轮形状！</div>
+          <div class="tbg">📚 当年这座山叫『煤山（Coal Hill）』，最多时有 17 条这样的缆车拉着钢铁工人和马车上下悬崖（出处：Duquesne Incline 官网）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-J07</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">圣诞木屋与黑玻璃水晶城堡</div>
+          <div class="ten">Alpine Chalets & The Black Glass Castle</div>
+          <div class="tloc">📍 圣诞市场 & PPG 冰场 ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在市中心免费的 Peoples Gas Holiday Market 和隔壁 PPG Place 冰场：① 在棕色小木屋摊位上找出 1 个德国胡桃夹子木偶（Nutcracker）或彩绘圣诞球；② 抬头看冰场后面黑色的 PPG 玻璃大厦，它的屋顶像什么形状？</div>
+          <div class="tqe">At Market Square Holiday Market & PPG Place: 1) Spot a Nutcracker or hand-painted ornament in a wooden chalet; 2) What do the black glass tower tops look like?</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【室内同分替代（10分）】若室外下雨，走进 PPG Place 一楼玻璃大厅或酒店大堂，观察圣诞树上挂着的三种不同形状的装饰物！</div>
+          <div class="tbg">📚 PPG 代表 Pittsburgh Plate Glass（匹兹堡平板玻璃公司），1883 年创立于此，造出了全美最早的大橱窗玻璃（出处：Downtown Pittsburgh 官网）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-F01</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">【奶奶点将】三河金三角五人同框全家福</div>
+          <div class="ten">[Grandma's Command] Three Rivers Golden Triangle Family Portrait</div>
+          <div class="tloc">📍 华盛顿山缆车 Duquesne Incline ｜ 👵 奶奶可坐答</div>
+          <div class="tq">由奶奶担任『总导演』，在 Mt. Washington 观景台（Duquesne 或 Monongahela Incline 上站旁，或 Schenley Overlook / Point State Park）选一个不用爬楼梯、背景能看到匹兹堡摩天楼或大河的安全位置，全家人一起比出『57』或挥手拍一张五人感恩节合照（或由两个孩子为奶奶画一幅三河天际线速写）！</div>
+          <div class="tqe">With Grandma as Director at Mt. Washington Overlook (or Schenley Overlook), take a 5-person family photo with the skyline/bridges in the background (or kids sketch the skyline for Grandma if not using a camera)!</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【雨夜室内同分替代（15分）】在 Phipps 温室鲜花拱门下、博物馆恐龙骨架前或温暖的晚餐桌旁，由奶奶指挥拍一张五人笑脸合照！</div>
+          <div class="tbg">📚 从煤烟蔽日的钢都到如今清澈的三河天际线，匹兹堡完成了人类城市史上最成功的环保转型之一（出处：VisitPittsburgh）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-F02</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 3</span>
+          </div>
+          <div class="ttitle">【返程高速站】阿勒格尼山脊的40根风铃与超充算术</div>
+          <div class="ten">[Return Highway Stop] 40 Wind Chimes of Flight 93 & EV Supercharger Math</div>
+          <div class="tloc">📍 93号航班风铃塔 Flight 93 ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在周日返程途中（Flight 93 国家纪念馆或 Somerset / Breezewood / Carlisle 超充站）全家合作完成：① 如果停靠了 Flight 93 风铃塔（Tower of Voices），听一听山风吹响的 40 根巨大铝合金风铃管，算一算 93 英尺高的塔身大约相当于几层楼高？② 在 Tesla 超充站充电时，10 岁观察员看屏幕上每分钟充进多少英里续航，12 岁侦探算一算从当前电量充到 80% 还需要多少分钟，向奶奶报告『我们几点几分可以拔枪出发』！</div>
+          <div class="tqe">On Sunday's return drive: 1) At Flight 93's 93-ft Tower of Voices, listen to the 40 wind chimes from the car or plaza; 2) At the Tesla Supercharger, calculate how many minutes until 80% charge and report the departure time to Grandma!</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【直达不绕行同分保证（15分）】即使周日选择直达不去 Flight 93，只要在 Breezewood 或 Carlisle 超充站完成『充电时间与续航计算』并读完 HC-10 故事卡给奶奶听，照样拿满 15 分！</div>
+          <div class="tbg">📚 我们行驶的 I-76 与 US-30 走廊翻越了海拔两千多英尺的阿勒格尼山脊（Allegheny Front），250 年前马车翻越这段山路需要整整两周，如今电车只需 1 小时（出处：NPS / PA Turnpike）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+      </div>
+      <div class="h-footer">
+        <span><strong>🎁 零花钱奖励：</strong>50分选全家人热饮 ｜ 80分晚餐首点甜点 ｜ 100分获奶奶签名证书 + 周日返程车载 DJ 点歌权！</span>
+        <span>纸卡精选 8 题共 100 分（均配免费/雨天替代）｜家长答案见独立页</span>
+      </div>
+    </div>
+    
+
+    <div class="hunt-sheet" id="card_senior">
+      <div class="h-header">
+        <div class="h-hleft">
+          <div class="h-badge">🧭 12岁侦探｜单页双语纸卡（配对网站 ID）</div>
+          <h1>匹兹堡城市寻宝｜12岁侦探任务卡 (Senior Detective Track)</h1>
+          <div class="h-sub">2026-11-27～29 五人家庭行 · 无需手机与二维码，纸卡直接玩！完整 22 题及互动计分见微信网站（同题 ID 同步）</div>
+        </div>
+        <div class="h-score">
+          <div class="hs-l">探险家姓名 Name</div>
+          <div class="hs-line"></div>
+          <div class="hs-l" style="margin-top:3px;">得分 Score：_____ / 105</div>
+        </div>
+      </div>
+      <div class="h-rules">
+        <strong>🛡️ 安全规则：</strong>不与大人和奶奶分开；远离车流轨线；不进需球票检票区；不拍陌生人、无需扫码或购物。 ｜ <strong>👵 奶奶角色：</strong>首席领航员 & 计分官！汇报发现，奶奶点头即勾选得分！
+      </div>
+      <div class="tgrid-2col">
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S01</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">摩天大楼推理：真石拱还是钢架伪装？</div>
+          <div class="ten">Skyscraper Detective: True Stone Vaults or Hidden Steel?</div>
+          <div class="tloc">📍 匹大灵魂教堂 Cathedral ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在 Cathedral of Learning 一楼 Commons Room 仰望 52 英尺高的哥特式石拱天花板，做一道建筑推理题：这座大楼高达 42 层（535英尺），你头顶的四扇拱顶石块是像中世纪欧洲教堂那样仅靠石头互相挤压承重的『真石拱』，还是挂在现代摩天楼钢骨架上的？一楼走廊的 31 间民族教室（含 136 号中国教室）为什么全都设计在 1930 年以前的历史年代？</div>
+          <div class="tqe">In the 52-ft tall Commons Room of the 42-story Cathedral: Are the ceiling stone vaults true load-bearing arches or suspended on steel? Why do all Nationality Rooms depict eras BEFORE 1787/1930?</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【同分替代（10分）】若未进大厅，从外部观察大楼立面：为什么整座 42 层大楼连一根横梁装饰都没有，全部采用从地面直冲云霄的垂直竖线条？</div>
+          <div class="tbg">📚 136 号中国教室于 1939 年落成，采用清代乾隆时期紫禁城宫殿规制，避开了近代战乱争议（出处：Pitt Nationality Rooms Archive）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S02</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-ticket">需门票/有免费替代</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">1893 维多利亚钢骨与零能耗温室对比</div>
+          <div class="ten">1893 Victorian Ironwork vs. Net-Zero Green Engineering</div>
+          <div class="tloc">📍 菲普斯温室 Phipps ｜ 👵 奶奶可坐答</div>
+          <div class="tq">【需门票】在 Phipps 温室做一次跨越百年的工程对比：① 在 1893 年建成的老馆 Palm Court，观察头顶弯曲的银色玻璃穹顶是如何排走冬季积雪并最大化吸收低角度冬日阳光的？② 找出老温室里的蒸汽暖气管道或顶部通风天窗机关，解释它在没有空调的 19 世纪怎样给热带植物降温或保暖？</div>
+          <div class="tqe">[Ticket Req] At Phipps Palm Court: How does the 1893 curved glass roof shed snow and catch low winter sunlight? How did 19th-century engineers cool it without AC?</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【免票/未去同分替代（15分）】在 Phipps 门外或 Schenley Overlook 观察温室玻璃屋顶：为什么温室由 9 个高矮不同、朝向各异的独立玻璃房间拼成，而不是盖成一个大平顶方盒子？</div>
+          <div class="tbg">📚 Phipps 后方的 Center for Sustainable Landscapes 是全球第一座同时获得 Living Building Challenge 等四项顶级零能耗认证的建筑（出处：Phipps 官网）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S03</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">化石侦探：如何一眼分辨真骨化石与复制品？</div>
+          <div class="ten">Fossil Sleuth: Real Holotype Bone vs. Casts & Inscriptions</div>
+          <div class="tloc">📍 卡内基博物馆 Carnegie ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在 Carnegie 博物馆外墙（免费）或馆内恐龙厅（需门票）二选一破案：①【免票外墙题】观察 4400 Forbes Ave 博物馆石头外墙上雕刻的大师名字：为什么卡内基要把『达尔文 Darwin、牛顿 Newton、伽利略 Galileo』和莎士比亚刻在同一面墙上？②【馆内化石题】在卡内基梁龙（Dippy）骨架展牌上找到『Holotype（正模标本）』这个词，观察哪些部位是深褐色沉重的真石化骨骼，为什么头骨要用轻质材料？</div>
+          <div class="tqe">Outside (Free): Find scientists like Darwin/Newton carved on the building frieze—why pair them with artists? OR Inside: Find 'Holotype' on Dippy—why is the skull a lightweight cast while vertebrae are real fossil stone?</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【全天候同分保证（15分）】外墙铭文可在廊下观察，馆内恐龙厅与建筑石膏厅全室内恒温。</div>
+          <div class="tbg">📚 Dippy 的学名 Diplodocus 意为『双梁』，因为它的每节尾巴骨下方都有两根像工字钢梁一样的分叉骨头来保护血管（出处：Carnegie Museum of Natural History）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S04</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 1 / Day 2</span>
+          </div>
+          <div class="ttitle">桥梁力学破案：没有岸边大铁锚的悬索桥怎么不塌？</div>
+          <div class="ten">Bridge Physics: How Do Self-Anchored Suspension Bridges Stand?</div>
+          <div class="tloc">📍 三姐妹黄桥 Three Sisters ｜ 👵 奶奶可坐答</div>
+          <div class="tq">站在 6th/7th/9th 街的三姐妹黄桥桥头（或从河岸观察），破解一个土木工程谜题：普通的悬索桥（比如金门大桥）必须在两岸陆地上埋两个像小山一样重的水泥大锚块，用来死死拉住主钢缆。但你看三姐妹桥的两端河岸只有狭窄的马路，根本没有巨型水泥锚块！那它顶部粗大的钢链（Eyebar chain）到底拴在了哪里？桥面主钢梁承受的是拉力还是挤压力？</div>
+          <div class="tqe">Look at the ends of the Three Sisters yellow bridges: Unlike the Golden Gate Bridge, there are no massive concrete anchor blocks on the riverbanks! Where are the suspension chains anchored, and is the bridge deck under tension or compression?</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【雨天车内同分替代（15分）】乘车过桥时盯着车窗外斜上方一节节下降的黄色宽钢板链条，看它在桥头怎样直接钻进路面两侧的钢梁里！</div>
+          <div class="tbg">📚 1926 年匹兹堡 American Bridge Company 用刚炼出的高强度钢板制造了眼杆链条（Eyebars），夺得当年全美最美钢桥奖（出处：ASCE Civil Engineering Landmarks）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S05</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2 / Day 3</span>
+          </div>
+          <div class="ttitle">三河地理与1754军事地图推理</div>
+          <div class="ten">Three Rivers Geography & 1754 Fort Duquesne Tactical Map</div>
+          <div class="tloc">📍 三河交汇 Point State Park ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在 Point State Park 或从 Mt. Washington 观景台俯瞰『金三角』，结合网站地图完成两项推理：① 为什么从南边流向北边的 Monongahela River（莫农加希拉河）水面看起来比北边的 Allegheny River 更浑浊、而且上面运煤驳船更多？② 1754 年法国和英国为什么宁可不守高高的山顶，也一定要把 Fort Duquesne / Fort Pitt 建在这个容易发洪水的低洼三角尖上？</div>
+          <div class="tqe">Looking at the Golden Triangle confluence from Point State Park or Mt. Washington: 1) Why did the Monongahela River carry more coal barges flowing NORTH? 2) Why did 1754 armies build forts on the low floodplain tip instead of the high hilltop?</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【室内地图同分替代（10分）】若室外大风降雨，在网页『地图与导航』SVG 图层或酒店里看着三河交汇几何图完成上述水运与军事推理，向奶奶讲清楚即可得分！</div>
+          <div class="tbg">📚 1753 年 21 岁的乔治·华盛顿就是在这里掉进冰封的阿勒格尼河里险些丧命，并写下了建议在此筑堡的著名报告（出处：Fort Pitt Museum / NPS）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-S06</span>
+            <span class="tpts">+10分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">30.5度悬崖缆车的配重能量守恒计算</div>
+          <div class="ten">30.5-Degree Funicular Counterbalance Physics</div>
+          <div class="tloc">📍 华盛顿山缆车 Duquesne Incline ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在 Duquesne Incline（或 Monongahela Incline）上站观察两节在斜坡上同时运行的缆车：轨道长 800 英尺、高差 400 英尺（坡度恰好 30.5°，sin30°=0.5）。如果一节空车重 12 吨，为什么山顶机房里只需要一台仅 75 马力（比一辆家用小轿车动力还小！）的老电动机，就能轻松把十几吨重的车厢拉上 30 度的陡峭悬崖？</div>
+          <div class="tqe">The Duquesne Incline track is 800 ft long with a 400 ft vertical rise (30.5° angle). If each wooden car weighs ~12 tons, how can a tiny 75-horsepower motor (weaker than a compact car!) pull it up a cliff?</div>
+          <div class="talt">☔ <strong>同分替代(+10分)：</strong>【全室内机房题（10分）】上站机房完全在室内，下雨天也能隔着玻璃地板看大滑轮运转！</div>
+          <div class="tbg">📚 Duquesne Incline 上站至今仍保留着 1877 年安装的铸铁与硬木齿轮传动装置，已连续安全运转近一个半世纪（出处：Duquesne Incline Engineering History）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-F01</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 2</span>
+          </div>
+          <div class="ttitle">【奶奶点将】三河金三角五人同框全家福</div>
+          <div class="ten">[Grandma's Command] Three Rivers Golden Triangle Family Portrait</div>
+          <div class="tloc">📍 华盛顿山缆车 Duquesne Incline ｜ 👵 奶奶可坐答</div>
+          <div class="tq">由奶奶担任『总导演』，在 Mt. Washington 观景台（Duquesne 或 Monongahela Incline 上站旁，或 Schenley Overlook / Point State Park）选一个不用爬楼梯、背景能看到匹兹堡摩天楼或大河的安全位置，全家人一起比出『57』或挥手拍一张五人感恩节合照（或由两个孩子为奶奶画一幅三河天际线速写）！</div>
+          <div class="tqe">With Grandma as Director at Mt. Washington Overlook (or Schenley Overlook), take a 5-person family photo with the skyline/bridges in the background (or kids sketch the skyline for Grandma if not using a camera)!</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【雨夜室内同分替代（15分）】在 Phipps 温室鲜花拱门下、博物馆恐龙骨架前或温暖的晚餐桌旁，由奶奶指挥拍一张五人笑脸合照！</div>
+          <div class="tbg">📚 从煤烟蔽日的钢都到如今清澈的三河天际线，匹兹堡完成了人类城市史上最成功的环保转型之一（出处：VisitPittsburgh）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+        <div class="tcard">
+          <div class="tcard-top">
+            <span class="chk">☐</span>
+            <span class="tid">HQ-F02</span>
+            <span class="tpts">+15分</span>
+            <span class="pill-free">免费 Free</span>
+            <span class="tday">Day 3</span>
+          </div>
+          <div class="ttitle">【返程高速站】阿勒格尼山脊的40根风铃与超充算术</div>
+          <div class="ten">[Return Highway Stop] 40 Wind Chimes of Flight 93 & EV Supercharger Math</div>
+          <div class="tloc">📍 93号航班风铃塔 Flight 93 ｜ 👵 奶奶可坐答</div>
+          <div class="tq">在周日返程途中（Flight 93 国家纪念馆或 Somerset / Breezewood / Carlisle 超充站）全家合作完成：① 如果停靠了 Flight 93 风铃塔（Tower of Voices），听一听山风吹响的 40 根巨大铝合金风铃管，算一算 93 英尺高的塔身大约相当于几层楼高？② 在 Tesla 超充站充电时，10 岁观察员看屏幕上每分钟充进多少英里续航，12 岁侦探算一算从当前电量充到 80% 还需要多少分钟，向奶奶报告『我们几点几分可以拔枪出发』！</div>
+          <div class="tqe">On Sunday's return drive: 1) At Flight 93's 93-ft Tower of Voices, listen to the 40 wind chimes from the car or plaza; 2) At the Tesla Supercharger, calculate how many minutes until 80% charge and report the departure time to Grandma!</div>
+          <div class="talt">☔ <strong>同分替代(+15分)：</strong>【直达不绕行同分保证（15分）】即使周日选择直达不去 Flight 93，只要在 Breezewood 或 Carlisle 超充站完成『充电时间与续航计算』并读完 HC-10 故事卡给奶奶听，照样拿满 15 分！</div>
+          <div class="tbg">📚 我们行驶的 I-76 与 US-30 走廊翻越了海拔两千多英尺的阿勒格尼山脊（Allegheny Front），250 年前马车翻越这段山路需要整整两周，如今电车只需 1 小时（出处：NPS / PA Turnpike）。</div>
+          <div class="twrite"><span>✏️ 写下答案或画在框里 / Write or Sketch Here:</span></div>
+        </div>
+        
+      </div>
+      <div class="h-footer">
+        <span><strong>🎁 零花钱奖励：</strong>50分选全家人热饮 ｜ 80分晚餐首点甜点 ｜ 100分获奶奶签名证书 + 周日返程车载 DJ 点歌权！</span>
+        <span>纸卡精选 8 题共 105 分（均配免费/雨天替代）｜家长答案见独立页</span>
+      </div>
+    </div>
+    
+
+        <div class="ans-sheet">
+          <div class="a-hdr">
+            <h1>🔐 家长与奶奶专属答案页（第 1/2 页）｜Pittsburgh Quest 全部 22 题解答</h1>
+            <div class="a-sub">与网站及纸卡 ID 一一对应；请单独折叠收好，由家长和『计分官奶奶』现场核对。</div>
+          </div>
+          <div class="a-grid">
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J01</span> <span class="atrk">[10岁观察员]</span> <strong>魔法大厅的铁花与汉字</strong> (10分 · Day 1 / Day 2 · 故事 HC-01)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>136 号中国教室（1939年建）门牌与椅背上刻有儒家美德汉字（如孝、忠、礼、义），一楼锻铁大门由匠人 Samuel Yellin 手工打造出哥特对称花叶纹。 <em>（判定：孩子向奶奶指出或画出任意 1 个汉字 + 描述 1 个铁门图案即为通过。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>去 136 室门口看牌匾或透过门窗看红木椅背，上面刻着『仁、义、礼、智、信』等汉字！ ｜ <strong>📚 出处：</strong>这座 42 层高的教学楼是由匹兹堡市民和小学生一人捐一分钱买砖盖起来的（出处：Pitt Nationality Rooms 官网）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J02</span> <span class="atrk">[10岁观察员]</span> <strong>温室里的松果火车站与对称花朵</strong> (15分 · Day 1 / Day 2 · 故事 HC-02)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>Phipps 微缩火车景观严格规定所有迷你建筑表面必须由天然植物材料（树皮、干果壳、苔藓）制成；冬季主打的一品红（Poinsettia）红色部分其实是呈放射对称的苞片（叶子）。 <em>（判定：能向家长或奶奶指出 2 处天然植物建材并画出星形叶片即可得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>看微缩火车穿过的隧道口和屋瓦，全是用树皮、橡子帽和松果一片片粘上去的！ ｜ <strong>📚 出处：</strong>1893 年钢铁大亨 Henry Phipps 建这座温室时，坚持周日必须开门，好让周日才放假的炼钢工人能带孩子看花（出处：Phipps 官网）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J03</span> <span class="atrk">[10岁观察员]</span> <strong>围巾恐龙 Dippy 与霸王龙的手指</strong> (15分 · Day 2 · 故事 HC-03)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>门外 Dippy 雕像是匹兹堡城市吉祥物，冬季会戴上手工编织的巨型彩条围巾；馆内的『卡内基梁龙』是 1899 年出土的全球第一具模式标本真骨，旁边的霸王龙前肢有 2 根手指。 <em>（判定：说出或画出门外 Dippy 围巾颜色/尾巴形状（或答出霸王龙 2 根手指）即拿满分 15 分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>门外的 Dippy 每年 11 月都会换上特制的超长绒线围巾；馆内霸王龙的小短手只有 2 根带爪手指！ ｜ <strong>📚 出处：</strong>当年卡内基把这只匹兹堡恐龙的复制品送给了英、法、德、俄等八国国王，让全世界认识了梁龙（出处：Carnegie Museum of Natural History）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J04</span> <span class="atrk">[10岁观察员]</span> <strong>阿兹特克金：寻找三胞胎黄桥</strong> (10分 · Day 1 / Day 2 · 故事 HC-04)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>三座桥（6th、7th、9th St）建于 1926-1928 年，采用完全相同的钢桁架拱门桥塔与 Aztec Gold（阿兹特克金黄）涂装。 <em>（判定：画出带拱门或 X 钢架的黄色桥塔即可得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>看桥塔上方连接两根柱子的横梁，是圆弧拱门形加上交叉的 X 形钢架！ ｜ <strong>📚 出处：</strong>匹兹堡拥有 446 座桥梁，而这三座是全美唯一一组一模一样的三联自锚式悬索桥（出处：Heinz History Center）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J05</span> <span class="atrk">[10岁观察员]</span> <strong>百年红缆车与脚下的大齿轮</strong> (10分 · Day 2 · 故事 HC-06)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>Duquesne Incline 车厢为复古樱桃红（1877年运营至今），山顶观景台可同时看到 Fort Pitt Bridge、Fort Duquesne Bridge、三姐妹桥等 10 余座大桥。 <em>（判定：答出车厢颜色并在山顶数出至少 5 座跨河大桥即满分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>Duquesne 缆车是深红色配奶油白窗框；从山顶往左右两条河看，一眼能数出超过 8 到 12 座大桥！ ｜ <strong>📚 出处：</strong>当年这座山叫『煤山（Coal Hill）』，最多时有 17 条这样的缆车拉着钢铁工人和马车上下悬崖（出处：Duquesne Incline 官网）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J06</span> <span class="atrk">[10岁观察员]</span> <strong>57号番茄酱与黑金球衣寻踪</strong> (10分 · Day 1 / Day 2 · 故事 HC-07)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>Steelers 标志里的三个四尖星（Hypocycloids）分别是黄（煤炭）、红（铁矿石）、蓝（废钢）；Heinz 57 是匹兹堡最著名的食品工业标志。 <em>（判定：向奶奶准确说出黄、红、蓝三色并找到一处 57 标志即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>三个四角菱形星星都在圆圈的左边或右边排列：上面是黄色、右边是橙红色、下面是蓝色！ ｜ <strong>📚 出处：</strong>Heinz History Center 对所有 17 岁及以下青少年和儿童完全免门票（出处：Heinz History Center 官网）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J07</span> <span class="atrk">[10岁观察员]</span> <strong>圣诞木屋与黑玻璃水晶城堡</strong> (10分 · Day 1 / Day 2 · 故事 HC-08)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>Market Square 圣诞市集采用德国传统木屋（Chalets）；背后的 PPG Place 由 19,750 块反射玻璃建成，拥有 231 座哥特式玻璃尖塔。 <em>（判定：指出一件节日木屋装饰并形容出玻璃大厦的皇冠/城堡尖顶即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>抬头看黑色玻璃大厦的屋顶，密密麻麻全像皇冠或中世纪城堡的尖塔！ ｜ <strong>📚 出处：</strong>PPG 代表 Pittsburgh Plate Glass（匹兹堡平板玻璃公司），1883 年创立于此，造出了全美最早的大橱窗玻璃（出处：Downtown Pittsburgh 官网）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J08</span> <span class="atrk">[10岁观察员]</span> <strong>餐桌上的丝绸之路或匹兹堡奇特美食</strong> (10分 · Day 2 · 故事 HC-06)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>匹兹堡汇集了中亚丝路美食（船型芝士烤饼、三角形/水滴形烤包子 Samsa）、意大利移民面包碗 Gnocchi 以及 1933 年大萧条卡车司机发明的薯条夹心三明治。 <em>（判定：在餐桌上向奶奶描述并画出今天吃到的特色面食形状即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>乌兹别克芝士饼像一艘两头尖尖的小船，正中间卧着金黄的蛋黄；匹兹堡三明治里直接塞满了现炸薯条，DiAnoia's 则把土豆团子面装在掏空的圆面包碗里！ ｜ <strong>📚 出处：</strong>各国移民把故乡的面食带到匹兹堡，形成了独特的钢城饮食文化（出处：Kavsar / Heinz History Center）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-J09</span> <span class="atrk">[10岁观察员]</span> <strong>穿隧道进出城的惊喜瞬间（或热带飞鸟）</strong> (10分 · Day 3 · 故事 HC-05)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>匹兹堡被《纽约时报》评为『全美最震撼的城市入口』——从南侧山腹里的 Fort Pitt Tunnel 钻出洞口的一秒钟内，车子直接冲上双层悬空大桥，整座金三角摩天楼群扑面而来。 <em>（判定：向奶奶形容出隧道口突然出现的城市/大桥景象，或说出一种彩色飞鸟即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>钻出 Fort Pitt 隧道的一刹那，原本黑乎乎的山洞会突然变成横跨大河的金色双层大桥和整片摩天大楼森林！ ｜ <strong>📚 出处：</strong>为了穿过陡峭的华盛顿山，工程师在山肚子底下凿通了长 3,600 英尺的隧道，一头连着山谷，一头直接连着跨河大桥桥面（出处：PennDOT History）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S01</span> <span class="atrk">[12岁侦探]</span> <strong>摩天大楼推理：真石拱还是钢架伪装？</strong> (10分 · Day 1 / Day 2 · 故事 HC-01)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>整座 42 层大楼内部是重型匹兹堡钢结构骨架，但一楼 Commons Room 的石拱顶竟然是建筑师坚持用真正承重石块砌筑的真哥特拱（底座埋入地下岩层）！而各民族教室规定只展示 1787 年（美国宪法及匹大建校年）之前的古典文化，以免把现代地缘政治争端带进大学课堂。 <em>（判定：给出合理建筑结构推理并与家长核对 1787 年建校年份规则即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>看看拱顶托住的可是上面近 40 层高的现代大学教室，如果不用钢梁会发生什么？而一楼拱石却是真承重的！至于教室年代，是为了避开 20 世纪的现代政治冲突。 ｜ <strong>📚 出处：</strong>136 号中国教室于 1939 年落成，采用清代乾隆时期紫禁城宫殿规制，避开了近代战乱争议（出处：Pitt Nationality Rooms Archive）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S02</span> <span class="atrk">[12岁侦探]</span> <strong>1893 维多利亚钢骨与零能耗温室对比</strong> (15分 · Day 1 / Day 2 · 故事 HC-02)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>弧形桶状穹顶（Curvilinear Roof）既让阳光在一天中任何角度都能垂直射入部分玻璃，又让暴雪自动滑落不压塌屋顶；夏天靠打开最高处的天窗利用『热空气上升（Stack Effect）』自然抽风，冬天靠步道下方的热水/蒸汽铸铁管保温。 <em>（判定：准确指出顶部热气天窗（烟囱效应）与底部加热管的对流原理即拿 15 分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>热空气会往上升！抬头看穹顶最顶端那一排可以推开的铰链玻璃窗，再看步道两侧脚下的铸铁暖气管道。 ｜ <strong>📚 出处：</strong>Phipps 后方的 Center for Sustainable Landscapes 是全球第一座同时获得 Living Building Challenge 等四项顶级零能耗认证的建筑（出处：Phipps 官网）。</div>
+            </div>
+            </div>
+          <div class="a-ftr">AI-GENERATED PITTSBURGH FAMILY PLAN — Gemini 4 Argon (Medium) — 2026-11-23 07:30 ET — Independent work, not guaranteed live navigation. ｜ 家长答案第 1/2 页</div>
+        </div>
+        
+
+        <div class="ans-sheet">
+          <div class="a-hdr">
+            <h1>🔐 家长与奶奶专属答案页（第 2/2 页）｜Pittsburgh Quest 全部 22 题解答</h1>
+            <div class="a-sub">与网站及纸卡 ID 一一对应；请单独折叠收好，由家长和『计分官奶奶』现场核对。</div>
+          </div>
+          <div class="a-grid">
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S03</span> <span class="atrk">[12岁侦探]</span> <strong>化石侦探：如何一眼分辨真骨化石与复制品？</strong> (15分 · Day 2 · 故事 HC-03)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>1) 卡内基特意把艺术馆、自然史馆和图书馆建在同一屋檐下，外墙并列刻下科学家与艺术家，宣告『科学与人文同等高贵』；2) Dippy 躯干与尾椎是 1899 年怀俄明出土的世界唯一正模真化石（Holotype），但真化石重达数吨，细长颈部末端若挂实心石化头骨会产生巨大力矩并有损毁风险，因此展架顶端常采用超轻精确模具。 <em>（判定：完成外墙铭文推理或馆内『头骨杠杆配重/正模标本』推理解释即得 15 分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>真化石骨头已经变成沉重的石头了！如果把几百斤重的实心石头脑袋挂在近 30 英尺长的细脖子末端，支架和颈椎会承受多大杠杆力矩？ ｜ <strong>📚 出处：</strong>Dippy 的学名 Diplodocus 意为『双梁』，因为它的每节尾巴骨下方都有两根像工字钢梁一样的分叉骨头来保护血管（出处：Carnegie Museum of Natural History）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S04</span> <span class="atrk">[12岁侦探]</span> <strong>桥梁力学破案：没有岸边大铁锚的悬索桥怎么不塌？</strong> (15分 · Day 1 / Day 2 · 故事 HC-04)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>这就是罕见的『自锚式悬索桥（Self-Anchored Suspension Bridge）』！主悬链直接铆接在桥面水平主钢梁（Stiffening Girder）的两端，悬链向内拉扯桥面两头，使整条桥面大梁像一根被两头往中间挤压的硬钢尺一样承受巨大的轴向压缩力（Compression），从而彻底省去了岸边巨型水泥锚碇！ <em>（判定：看出现场链条直接铆接在桥面端头，并推理出桥面钢梁承受『向内的水平挤压力（Compression）』即满分！）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>顺着桥塔顶上垂下来的斜链一直往下看，它直接用巨型钢销钉锁在了桥面边缘那根最粗的水平箱型钢梁两头！想象你拿一根绳子绑在一根硬木棍两头，再把绳子挂在钉子上——绳子往里拉木棍的两头！ ｜ <strong>📚 出处：</strong>1926 年匹兹堡 American Bridge Company 用刚炼出的高强度钢板制造了眼杆链条（Eyebars），夺得当年全美最美钢桥奖（出处：ASCE Civil Engineering Landmarks）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S05</span> <span class="atrk">[12岁侦探]</span> <strong>三河地理与1754军事地图推理</strong> (10分 · Day 2 / Day 3 · 故事 HC-05)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>1) Monongahela 河由南向北流经阿巴拉契亚核心主煤田，顺流就能把煤炭直接漂进匹兹堡钢厂；2) 18世纪没有铁路和公路，重武器与粮食全靠河船运输，把五角星棱堡建在贴近水面的三角尖，既能让火炮贴着水面封锁全部三条河流的船只，又能让后方两面以大河作天然护城河，只需在东侧陆地挖一条壕沟即可防守。 <em>（判定：推理出『大炮平射封锁两条航道 + 战船直接靠岸补给 + 三面环水天然护城河』即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>1) 莫农加希拉河从西弗吉尼亚和宾州西南煤田由南向北流（北美罕见的向北流大河），河底全是细腻黏土；2) 18世纪的大炮射程只有几百米，如果建在 400 英尺高的山上，炮弹能精准封锁两条河面上的木船吗？而且军舰和补给船靠岸卸货需要什么？ ｜ <strong>📚 出处：</strong>1753 年 21 岁的乔治·华盛顿就是在这里掉进冰封的阿勒格尼河里险些丧命，并写下了建议在此筑堡的著名报告（出处：Fort Pitt Museum / NPS）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S06</span> <span class="atrk">[12岁侦探]</span> <strong>30.5度悬崖缆车的配重能量守恒计算</strong> (10分 · Day 2 · 故事 HC-06)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>因为两节 12 吨重的车厢拴在同一根主牵引钢缆的两端，就像天平两侧的砝码（物理学上的斜面阿特伍德机 Atwood Machine）：下山车厢往下滑的重力（12吨×sin30°=6吨拉力）100% 用来把上山车厢往上拉！山顶的电动机根本不需要拉起 12 吨的车厢，它只需要提供克服滑轮摩擦力和两车『乘客体重差』的一点点力气就够了！ <em>（判定：解释出『下山车厢的重力刚好抵消了上山车厢的重力（阿特伍德机/配重平衡）』即拿满分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>两条轨道上的两节车厢并不是各自独立开动的，它们被同一根绕过山顶大滑轮的主钢缆拴在两头！当左边的车往上爬时，右边的车正在干什么？ ｜ <strong>📚 出处：</strong>Duquesne Incline 上站至今仍保留着 1877 年安装的铸铁与硬木齿轮传动装置，已连续安全运转近一个半世纪（出处：Duquesne Incline Engineering History）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S07</span> <span class="atrk">[12岁侦探]</span> <strong>条带区（Strip District）的铁路建筑密码</strong> (10分 · Day 1 / Day 2 · 故事 HC-07)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>证据包括：1) Strip Terminal 全长 5 个街区的连续抬高式混凝土卸货月台（高度恰好对齐当年 Pennsylvania Railroad 冷藏货运车厢地板）；2) 沿街仓库立面上保留的巨型卷帘门洞与悬挂滑轮钩；3) 1212 Smallman St（现 Heinz History Center）外墙保留的 1898 年 Chautauqua Lake Ice Co. 巨型无窗厚砖保温墙结构。 <em>（判定：指出『与货运车厢齐平的高卸货月台（Loading Dock）』、『超宽拱形货车门』或『冰库/货站铭牌』中任意 2 项即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>低头看老仓库门廊的高度（为什么一楼水泥台子比马路高出约 1.2 米，刚好和火车车厢地板一样高？），再看马路拐角处保护墙角的铸铁防撞柱，或者建筑外墙上残留的『Produce Terminal / Cold Storage / Railroad』字样！ ｜ <strong>📚 出处：</strong>1926 年建成的 Produce Terminal 曾是全美最大的果蔬铁路批发站，每天凌晨有数百节火车车厢在此卸货（出处：Heinz History Center Archives）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S08</span> <span class="atrk">[12岁侦探]</span> <strong>CMU 计算机圣地的二进制与倾斜钢柱之谜</strong> (10分 · Day 2 · 故事 HC-01)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>雕塑共有 10 个人物（7 人沿柱向上行走，3 人站在地面仰望）；钢柱之所以倾斜 75 度不倒，是因为底部深埋了重达数十吨的扩展钢筋混凝土基础锚栓，且高空部分采用高强度薄壁中空不锈钢管减轻上部力矩。 <em>（判定：数出总人数（10人，或柱上7人）并解释出『地下深埋重型钢筋混凝土配重基座 + 顶部空心轻量化使重心落在底座支点内』即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>地面以下看不见的地方藏着什么？而且钢柱越往上越粗还是越细？一共是柱子上 7 个人 + 地面上 3 个人 = 10 个人！ ｜ <strong>📚 出处：</strong>CMU 是全球人工智能（AI）与机器人学的诞生地之一，连校园里的垃圾桶和送餐小车都经常带有传感器研究编号（出处：CMU Public Art）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-S09</span> <span class="atrk">[12岁侦探]</span> <strong>四尖内摆线（Hypocycloid）与全城同色之谜</strong> (5分 · Day 1 / Day 2 · 故事 HC-09)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>黑与金直接源自英国首相 William Pitt（第一代查塔姆伯爵）家族纹章上的黑底金币图案，也是匹兹堡市旗的官方颜色；三个四角星在几何学中叫四尖内摆线（Four-cusped Hypocycloid / Astroid），源自美国钢铁学会（AISI）的 Steelmark 标志。 <em>（判定：向奶奶讲出『英国首相老威廉·皮特（William Pitt）家族黑金盾徽』与『内摆线/钢铁三原料』即得分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>这座城市叫 Pittsburgh（匹兹堡）——是以 1758 年英国首相 William Pitt 命名的！数学上，一个小圆在大圆内部滚动描出的四个尖角曲线叫『四尖内摆线（Astroid / Hypocycloid）』。 ｜ <strong>📚 出处：</strong>1962 年钢人队器材师因为怕贴坏金色头盔，只在头盔右侧贴了这枚标志，结果球队大胜，从此成为 NFL 唯一单侧贴标的头盔（出处：Steelers Official History）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-F01</span> <span class="atrk">[全家合作（奶奶主持）]</span> <strong>【奶奶点将】三河金三角五人同框全家福</strong> (15分 · Day 2 · 故事 HC-06)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>华盛顿山 Grandview Ave 被《USA Today》评为全美十大最美城市天际线夜景第二名，能把两条河汇成俄亥俄河的整个三角洲收进同一张画面。 <em>（判定：奶奶确认全家已完成合影或速写即通过（无需相机权限或上传）。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>不用上传任何照片！只要全家人站在一起拍了照，或者孩子在纸卡上给奶奶画了天际线，奶奶点头就拿 15 分！ ｜ <strong>📚 出处：</strong>从煤烟蔽日的钢都到如今清澈的三河天际线，匹兹堡完成了人类城市史上最成功的环保转型之一（出处：VisitPittsburgh）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-F02</span> <span class="atrk">[全家合作（沿途历史）]</span> <strong>【返程高速站】阿勒格尼山脊的40根风铃与超充算术</strong> (15分 · Day 3 (Return En-Route) · 故事 HC-10)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>Flight 93 的 93 英尺高塔代表 93 号航班，40 根风铃代表 40 位乘客与机组成员；Model Y 在 150kW-250kW 超充桩从 20% 充至 80% 通常仅需约 22-28 分钟，刚好够全家上一次洗手间、喝杯热茶。 <em>（判定：两个孩子合作向奶奶汇报准确拔枪出发时间（及风铃塔40位英雄故事）即拿 15 分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>一层楼大约 10 英尺，93 英尺大约是 9 层楼高！Tesla 车机屏幕右上角会直接显示距离 80% 充饱的剩余分钟数。 ｜ <strong>📚 出处：</strong>我们行驶的 I-76 与 US-30 走廊翻越了海拔两千多英尺的阿勒格尼山脊（Allegheny Front），250 年前马车翻越这段山路需要整整两周，如今电车只需 1 小时（出处：NPS / PA Turnpike）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-F03</span> <span class="atrk">[全家合作（奶奶有奖问答）]</span> <strong>【奶奶出题官】为什么匹兹堡以前大白天要开路灯？</strong> (10分 · Day 1 / Day 2 · 故事 HC-07)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>19 世纪末至 1940 年代，匹兹堡河谷里聚集了上千座焦炭炉与炼钢高炉，大量燃烧高烟雾的烟煤（Bituminous coal），加上三河深谷逆温层锁住浓烟，导致正午如黑夜；1946 年起匹兹堡通过全美最早的严厉控烟法令并整治三河防洪，随后逐步从重工业成功转型为以 Pitt、CMU 为核心的教育、医疗与科技之都。 <em>（判定：两个孩子一人答出『烧软煤炼钢+三河山谷地形锁住煤烟』，一人答出『二战后控烟法案+转型为大学/医疗/机器人科技城』即拿 10 分。）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>10 岁观察员想想当年几百座炼钢炉烧的是什么煤（烟雾加河谷大雾=Smog）？12 岁侦探想想二战后市政府强制推广无烟煤/天然气，以及今天我们在 Oakland 看到满街都是什么机构（大学与医院 UPMC）？ ｜ <strong>📚 出处：</strong>正是因为当年煤烟太重，富豪卡内基和菲普斯才拼命捐建室内有玻璃天窗的博物馆和恒温植物园，让市民呼吸干净空气（出处：Heinz History Center）。</div>
+            </div>
+            
+            <div class="a-card">
+              <div class="a-head"><span class="tid">HQ-F04</span> <span class="atrk">[全家合作（感恩节温情收官）]</span> <strong>【感恩节金句】每人选出一个最难忘的匹兹堡瞬间</strong> (10分 · Day 3 · 故事 HC-08)</div>
+              <div class="a-body"><strong>✅ 答案：</strong>家庭旅行最珍贵的成果不是打卡了多少景点，而是三代人在同一座桥、同一间温室、同一张餐桌前留下的共同记忆。 <em>（判定：全家五人完成分享，奶奶宣布通关！）</em></div>
+              <div class="a-hint"><strong>💡 提示：</strong>没有标准答案！只要五个人都分享了自己的快乐瞬间，直接加 10 分通关！ ｜ <strong>📚 出处：</strong>自 1863 年林肯总统将感恩节定为美国全国性节日以来，感恩节周末就是全美家庭跨州团聚与分享感恩的传统时刻。</div>
+            </div>
+            </div>
+          <div class="a-ftr">AI-GENERATED PITTSBURGH FAMILY PLAN — Gemini 4 Argon (Medium) — 2026-11-23 07:30 ET — Independent work, not guaranteed live navigation. ｜ 家长答案第 2/2 页</div>
+        </div>
+        
+
+    <div class="cert-sheet" id="cert_page">
+      <div class="cert-frame">
+        <div class="cert-inner">
+          <div class="cert-emblem">★ 2026 PITTSBURGH THANKSGIVING FAMILY QUEST ★</div>
+          <div class="cert-title-zh">匹兹堡城市寻宝荣誉证书</div>
+          <div class="cert-title-en">OFFICIAL CERTIFICATE OF PITTSBURGH DISCOVERY</div>
+          <div class="cert-award-to">兹授予勇敢、细心、爱思考的小探险家 / Proudly Presented To</div>
+          <div class="cert-name-line"></div>
+          <div class="cert-track-check">☐ 10岁观察员 (Junior Observer) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ☐ 12岁侦探 (Senior Detective)</div>
+          <div class="cert-body">
+            在 <strong>2026年11月27日至29日</strong> 感恩节五人家庭匹兹堡三日行中，成功跨越三河与黄色大桥，探访匹大136号中国教室、卡内基恐龙化石、菲普斯百年玻璃温室与华盛顿山悬崖缆车，与奶奶默契合作，圆满完成 <strong>匹兹堡城市寻宝（Pittsburgh Quest）</strong> 挑战！
+          </div>
+          <div class="cert-rewards">
+            <h3>🎁 荣誉特权兑换券（不花钱的家庭专属奖励）</h3>
+            <div class="reward-grid">
+              <div class="reward-card"><div class="r-badge">☐ 50分 · 三河小舵手</div><div class="r-txt">指定下午热饮口味，或挑选车上第一首出发金曲！</div></div>
+              <div class="reward-card"><div class="r-badge">☐ 80分 · 钢铁城大侦探</div><div class="r-txt">晚餐第一个点选开胃菜/甜点，并点名家长讲一个故事！</div></div>
+              <div class="reward-card"><div class="r-badge">☐ 100分 · 匹兹堡荣誉市民</div><div class="r-txt">拥有周日返程全车「车载 DJ 点歌权」与下次家庭旅行首票权！</div></div>
+            </div>
+          </div>
+          <div class="cert-sigs">
+            <div><div class="sig-line"></div><div class="sig-cap">👵 首席计分官：奶奶签名<br>Grandma's Signature</div></div>
+            <div><div class="sig-line"></div><div class="sig-cap">🏆 最终得分 / 徽章等级<br>Final Score ( ___ / 100+ )</div></div>
+            <div><div class="sig-line"></div><div class="sig-cap">📅 颁奖日期：2026年11月29日<br>Pittsburgh, PA</div></div>
+          </div>
+          <div class="cert-foot">AI-GENERATED PITTSBURGH FAMILY PLAN — Gemini 4 Argon (Medium) — 2026-11-23 07:30 ET — Independent work, not guaranteed live navigation.</div>
+        </div>
+      </div>
+    </div>
+    
+</body>
+</html>
